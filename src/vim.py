@@ -1,4 +1,5 @@
 import os
+import copy
 import polib
 import simplejson
 
@@ -28,10 +29,23 @@ def po_parse(loc, po_path):
 
 def main():
 	catalogs = {}
+	last_loc = ""
 	for poFilePath in po_listup():
 		loc = poFilePath.split('/')[-1].split('.')[0]
 		entries = po_parse(loc, poFilePath)
 		catalogs[loc] = entries
+		last_loc = loc
+	
+	# add en
+	entries_en = []
+	for entry in catalogs['en_GB']:
+		entry_en = copy.copy(entry)
+		entry_en.locale = 'en'
+		entry_en.msg_str = entry_en.msg_id
+		entries_en.append(entry_en)
+	catalogs['en'] = entries_en
+
+	# serialize json
 	with open(OUTPUT_JSON_PATH, 'w') as fp:
 		j = simplejson.dumps(catalogs, cls=Serializer, sort_keys=True, indent=2 * ' ')
 		fp.write(j)
