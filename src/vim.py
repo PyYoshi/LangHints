@@ -29,12 +29,10 @@ def po_parse(loc, po_path):
 
 def main():
 	catalogs = {}
-	last_loc = ""
 	for poFilePath in po_listup():
 		loc = poFilePath.split('/')[-1].split('.')[0]
 		entries = po_parse(loc, poFilePath)
 		catalogs[loc] = entries
-		last_loc = loc
 	
 	# add en
 	entries_en = []
