@@ -6,12 +6,14 @@ realpath() {
 
 SCRIPT_PATH=$(realpath $0)
 ROOT_PATH=`dirname $SCRIPT_PATH`/..
+SRC_PATH=$ROOT_PATH/src
 WORKSPACE_ROOT_PATH=$ROOT_PATH/workspace
 
 WORKSPACE_VIM_PATH=$WORKSPACE_ROOT_PATH/vim
 WORKSPACE_VSCODE_PATH=$WORKSPACE_ROOT_PATH/vscode
 WORKSPACE_MOZILLA_CENTRAL_PATH=$WORKSPACE_ROOT_PATH/mozilla-central
 WORKSPACE_MOZILLA_L10N_CENTRAL_PATH=$WORKSPACE_ROOT_PATH/mozilla-l10n-central
+WORKSPACCE_WORDPRESS_PATH=$WORKSPACE_ROOT_PATH/wordpress
 
 if [ ! -d $WORKSPACE_ROOT_PATH ]; then
 	mkdir $WORKSPACE_ROOT_PATH
@@ -88,7 +90,15 @@ update_mozilla_l10n_central() {
 	done
 }
 
+update_wordpress() {
+	if [ ! -d $WORKSPACCE_WORDPRESS_PATH ]; then
+		mkdir $WORKSPACCE_WORDPRESS_PATH
+	fi
+	python $SRC_PATH/dl_wordpress.py
+}
+
 update_vim
 update_vscode
 update_mozilla_central
 update_mozilla_l10n_central
+update_wordpress
