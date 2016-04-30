@@ -14,6 +14,7 @@ WORKSPACE_VSCODE_PATH=$WORKSPACE_ROOT_PATH/vscode
 WORKSPACE_MOZILLA_CENTRAL_PATH=$WORKSPACE_ROOT_PATH/mozilla-central
 WORKSPACE_MOZILLA_L10N_CENTRAL_PATH=$WORKSPACE_ROOT_PATH/mozilla-l10n-central
 WORKSPACCE_WORDPRESS_PATH=$WORKSPACE_ROOT_PATH/wordpress
+WORKSPACE_GIMP_PATH=$WORKSPACE_ROOT_PATH/gimp
 
 if [ ! -d $WORKSPACE_ROOT_PATH ]; then
 	mkdir $WORKSPACE_ROOT_PATH
@@ -97,8 +98,21 @@ update_wordpress() {
 	python $SRC_PATH/dl_wordpress.py
 }
 
+update_gimp() {
+	if [ ! -d $WORKSPACE_GIMP_PATH ]; then
+		cd $WORKSPACE_ROOT_PATH
+		git clone https://github.com/GNOME/gimp.git
+	else
+		cd $WORKSPACCE_GIMP_PATH
+		git reset --hard HEAD
+		git checkout master
+		git pull
+	fi
+}
+
 update_vim
 update_vscode
 update_mozilla_central
 update_mozilla_l10n_central
 update_wordpress
+update_gimp
