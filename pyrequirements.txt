@@ -1,1 +1,6 @@
+beautifulsoup4==4.4.1
+cchardet==1.0.0
+lxml==3.6.0
 polib==1.0.7
+simplejson==3.8.2
+six==1.10.0
