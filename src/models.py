@@ -10,7 +10,5 @@ class Entry(object):
 class Serializer(simplejson.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Entry):
-            # key = '__%s__' % obj.__class__.__name__
-            # return {key: obj.__dict__}
             return obj.__dict__
         return simplejson.JSONEncoder.default(self, obj)
