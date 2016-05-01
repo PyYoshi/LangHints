@@ -5,7 +5,7 @@
 ## OSX
 
 ```bash
-brew install v8 boost-python node
+
 ```
 
 ## Common
